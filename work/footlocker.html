@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCNYC x Foot Locker — Filtayrich Productions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--white:#f5f2ec;--gold:#c9a84c;--gold-light:#e8c96a;--gray:#1a1a1a;--mid:#888;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+  .cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:difference;}
+  .cursor-ring{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,width .3s,height .3s;opacity:.6;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;}
+  nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.95) 0%,transparent 100%);z-index:-1;}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.15em;color:var(--white);text-decoration:none;}.nav-logo span{color:var(--gold);}
+  .nav-back{color:var(--mid);text-decoration:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:color .3s;}.nav-back:hover{color:var(--gold);}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}.reveal.visible{opacity:1;transform:translateY(0);}
+  .case-hero{min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;position:relative;overflow:hidden;background:linear-gradient(135deg,#05050f,#0f0f1e);}
+  .case-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 80% 20%,rgba(201,168,76,.07) 0%,transparent 70%);}
+  .case-tag{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:fadeUp .8s ease .3s forwards;}
+  .case-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,10vw,160px);line-height:.9;letter-spacing:.02em;opacity:0;animation:fadeUp .9s ease .5s forwards;}
+  .case-subtitle{font-size:18px;color:var(--mid);max-width:600px;line-height:1.7;margin-top:24px;opacity:0;animation:fadeUp .9s ease .7s forwards;}
+  .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold);}
+  .stat-item{background:var(--black);padding:40px;text-align:center;}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);color:var(--gold);line-height:1;}
+  .stat-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--mid);margin-top:6px;}
+  .case-body{max-width:1200px;margin:0 auto;padding:120px 48px;}
+  .case-grid{display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:start;}
+  .case-section{margin-bottom:56px;}
+  .case-section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+  .case-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,3.5vw,44px);letter-spacing:.03em;margin-bottom:20px;line-height:1.1;}
+  .case-section p{font-size:15px;color:rgba(245,242,236,.72);line-height:1.85;margin-bottom:12px;}
+  .case-sidebar{position:sticky;top:120px;}
+  .sidebar-block{background:var(--gray);padding:36px;margin-bottom:2px;}
+  .sidebar-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .sidebar-value{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.05em;line-height:1.4;}
+  .sidebar-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .sidebar-list li{font-size:13px;color:var(--mid);padding-left:12px;position:relative;}.sidebar-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+  .add-video-note{background:rgba(201,168,76,.06);border:1px dashed rgba(201,168,76,.3);padding:20px 24px;font-size:12px;color:var(--gold);letter-spacing:.1em;text-align:center;margin:40px 0;}
+  .case-nav{display:flex;justify-content:space-between;align-items:center;padding:60px 48px;border-top:1px solid rgba(255,255,255,.06);max-width:1200px;margin:0 auto;}
+  .case-nav a{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.05em;color:var(--mid);text-decoration:none;transition:color .3s;}.case-nav a:hover{color:var(--gold);}
+  .case-nav-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;}
+  footer{background:#050505;padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;border-top:1px solid rgba(255,255,255,.04);}
+  .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.1em;color:var(--white);text-decoration:none;}.footer-logo span{color:var(--gold);}
+  .footer-copy{font-size:11px;color:rgba(136,136,136,.5);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:900px){nav{padding:24px;}.case-hero{padding:0 24px 60px;}.case-body{padding:60px 24px;}.case-grid{grid-template-columns:1fr;}.case-sidebar{position:static;}.stats-bar{grid-template-columns:1fr;}footer{padding:40px 24px;flex-direction:column;}.case-nav{padding:40px 24px;flex-direction:column;gap:24px;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div><div class="cursor-ring" id="cursorRing"></div>
+<nav><a href="../index.html" class="nav-logo">FILTAY<span>RICH</span></a><a href="../index.html#work" class="nav-back">← All Work</a></nav>
+<section class="case-hero">
+  <div class="case-hero-bg"></div>
+  <p class="case-tag">Retail · Community · Fashion</p>
+  <h1 class="case-title">CCNYC x Foot Locker</h1>
+  <p class="case-subtitle">Individual brand films for emerging NYC designers, plus a behind the scenes documentary that captured the whole thing.</p>
+</section>
+<div class="stats-bar">
+  <div class="stat-item reveal"><div class="stat-num">2</div><div class="stat-label">Production Rounds</div></div>
+  <div class="stat-item reveal"><div class="stat-num">Multi</div><div class="stat-label">Brand Films Delivered</div></div>
+  <div class="stat-item reveal"><div class="stat-num">NYC</div><div class="stat-label">Multicultural Creative Community</div></div>
+</div>
+<div class="case-body">
+  <div class="case-grid">
+    <div>
+      <div class="case-section reveal">
+        <p class="case-section-label">The Brief</p>
+        <h2>Give These Designers a Real Platform</h2>
+        <p>The Creative Collective NYC runs a program in partnership with Foot Locker, Footaction, and Champs called LEED that selects a cohort of emerging NYC fashion designers and gives them resources and visibility to grow.</p><p>We were hired across two rounds of production to create individual brand films for each selected designer and a short documentary capturing the full experience.</p>
+      </div>
+      <div class="add-video-note reveal">✦ Add your CCNYC x Foot Locker video here — paste your YouTube or Vimeo embed and replace this block</div>
+      <div class="case-section reveal">
+        <p class="case-section-label">The Approach</p>
+        <h2>Every Designer Gets Their Own Story</h2>
+        <p>The challenge was balancing consistency with individuality. Each designer needed a film that reflected their specific brand voice while the documentary needed to capture the collective energy of the entire program.</p><p>We handled direction, camera operation, editing, and music supervision across both production rounds. One team, many voices, one cohesive body of work.</p>
+      </div>
+      <div class="case-section reveal">
+        <p class="case-section-label">The Results</p>
+        <h2>Content That Opens Doors</h2>
+        <p>Each designer walked away with professional brand film content that could hold its own next to established brands. The documentary gave the CCNYC community a piece of work they could share and be proud of.</p><p>This is what community storytelling looks like when production quality matches the ambition of the people in front of the camera.</p>
+      </div>
+    </div>
+    <div class="case-sidebar">
+      <div class="sidebar-block reveal"><p class="sidebar-label">Client</p><p class="sidebar-value">CCNYC x Foot Locker</p></div>
+      <div class="sidebar-block reveal"><p class="sidebar-label">Industry</p><p class="sidebar-value">Fashion / Retail / Community</p></div>
+      <div class="sidebar-block reveal"><p class="sidebar-label">Engagement</p><p class="sidebar-value">Campaign Production</p></div>
+      <div class="sidebar-block reveal"><p class="sidebar-label">Roles</p><ul class="sidebar-list"><li>Director</li><li>Camera Operator</li><li>Editor</li><li>Music Supervision</li></ul></div>
+      <div class="sidebar-block reveal"><p class="sidebar-label">Deliverables</p><ul class="sidebar-list"><li>Individual brand films</li><li>Behind the scenes documentary</li><li>Photo direction</li></ul></div>
+    </div>
+  </div>
+</div>
+<div class="case-nav">
+  <div><p class="case-nav-label">← Previous</p><a href="poppyseed.html">Poppy Seed Health</a></div>
+  <div style="text-align:right"><p class="case-nav-label">Next →</p><a href="chefrob.html">Chef Roblé</a></div>
+</div>
+<footer><a href="../index.html" class="footer-logo">FILTAY<span>RICH</span></a><p class="footer-copy">© 2026 Filtayrich Productions</p></footer>
+<script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';});
+  document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});el.addEventListener('mouseleave',()=>{cursor.style.width='10px';cursor.style.height='10px';ring.style.width='36px';ring.style.height='36px';});});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body></html>
