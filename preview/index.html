@@ -67,6 +67,7 @@
  if(workToggle&&workPanel){workToggle.addEventListener('click',function(){const expanded=workToggle.getAttribute('aria-expanded')==='true';workToggle.setAttribute('aria-expanded',String(!expanded));workPanel.hidden=expanded;});}
  const cards=Array.from(document.querySelectorAll('.reel-trigger')),stageImage=document.getElementById('filmStageImage'),stageVisual=document.getElementById('filmStageVisual'),stageIndex=document.getElementById('stageIndex'),stageTitle=document.getElementById('stageTitle'),stageType=document.getElementById('stageType'),stageDescription=document.getElementById('stageDescription'),stageOriginal=document.getElementById('stageOriginal'),stagePlay=document.getElementById('stagePlay'),more=document.getElementById('filmMore');
  let selected=cards[0]||null,expanded=false;
+ stageImage.addEventListener('error',function(){this.hidden=true;stageVisual.classList.add('stage-no-poster');});stageImage.addEventListener('load',function(){this.hidden=false;stageVisual.classList.remove('stage-no-poster');});
  cards.forEach(function(card){card.dataset.kind=card.dataset.url.indexOf('/p/')>-1?'post':'reel';});
  function setFeatured(card){
    if(!card)return;selected=card;
